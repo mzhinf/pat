@@ -1,0 +1,92 @@
+1095. Cars on Campus (30)
+题目不难就是比较复杂
+分析：给出进出校园的车辆信息，包括车牌，出入时间，出入状态。对于给出的车辆信息，入出不匹配的信息忽略。（匹配规则类似if/else）求某时刻校园内的车辆数。与停车时间最长的车牌与时间，车辆不唯一时字典序同行输出。
+map<string, int> 记录车牌与标记id 车牌查id
+map<int, string> 记录标记id与车牌 id查车牌
+vector<string> 使用vector排序后可以使string字典序
+
+
+1080. Graduate Admission (30)
+这英文，我醉了
+分析：1.根据最终成绩排名；2.最终成绩相同则比较Ge成绩，若Ge成绩相同则rank相同；3.按照先排名再志愿给学生分配学校，不得超出招生人数；4.对于相同名次学生，学校接受一个就必须接受全部，即便超过了招生人数。
+题解：模拟即可
+
+1049. Counting Ones (30)
+分析：给定数字n，求1 - n数字中1的总和
+题解：将区间扩大至0 - n，依次分析每一位含有的1的数目，再求和。
+0000000
+...
+0000009
+0000010
+...
+0000099
+0000100
+....
+abcdefg
+个位10个一循环 百位100个一循环 千位一千个一循环 ...
+对于位数i，有(n+1)/10^i * 10^(i-1) + min(10^(i-1), (n+1)%10^i-10^(i-1))
+(n+1)%10^i-10^(i-1)若小于0则取0
+
+
+1075. PAT Judge (25)
+分析：按成绩排序；同成绩相同rank；同成绩按满分题目个数排序，若仍然相同则按id降序排列；没有有效提交则不进入成绩list（编译通过的提交为有效提交）
+
+
+1090. Highest Price in Supply Chain (25)
+分析：层次遍历求出树高h和叶子节点个数，最高价格为p*(1+r)^(h-1)
+
+
+1096. Consecutive Factors (20)
+分析：求一个数最长的连续因子乘积（不包含1），即n=i*j*k*(k+1)*(k+2)。此时最长连续因子为k...k+2。n小于2^31次方 -> 最长连续因子不超过11；最大因子不超过√n。可在√n*11的时间内算出所有可能，遍历找出答案。复杂度：O(√n)
+
+
+1087. All Roads Lead to Rome (30)
+分析：有附加条件的最短路。在搜索a到b的最短路（花费）
+
+1094. The Largest Generation (25)
+分析：给出一个家谱，计算那一代的人数最多。建树层次遍历即可。
+
+1068. Find More Coins (30)
+分析：给出一组重复数列，求数列组成m的最优序列。最优序列：（Note: sequence {A[1], A[2], ...} is said to be "smaller" than sequence {B[1], B[2], ...} if there exists k >= 1 such that A[i]=B[i] for all i < k, and A[k] < B[k].） 即：要求有序序列最长，相同长度的有序序列最后一个值最大。
+
+1076. Forwards on Weibo (30)
+分析：背景为微博的关注关系，以关注关系构建有向图，每次查询的是可为该用户转发微博的最大用户数，且不超过L层。构建有向图层次遍历即可。
+
+1018. Public Bike Management (30)
+分析：the one that requires the least number of bikes sent from PBMC will be chosen. 即：在最短路相等时选择send最小的路径。（而且存在相同need时选择最小的over）
+题解：dij + dfs。先用dij处理出所有的最短路，再用dfs处理出最小的need与over。（对于相同的need，选择最小的over，对于下一次选择会使得need变大，因为over可以抵消need，over越大可以使得need越小，故不能使用单纯的dij）
+
+1084. Broken Keyboard (20)
+分析：从A字符串中找到所有B中没有的，然后输出，注意要把字母转为大写，并且重复的只输出一次，输出顺序为与从前到后探测到的顺序相同。
+
+1085. Perfect Sequence (25)
+分析：选取最的的序列，符合 max <= min * p 。可使用尺取法O(n)。	
+
+1086. Tree Traversals Again (25)
+分析：push为先序 pop为中序 推后序
+*注：开始节点不为1
+
+1074. Reversing Linked List (25)
+分析：注意存在结点不存在链表的情况
+
+
+1071. Speech Patterns (25)
+分析：
+题解
+分析字符串
+将单词(a-z,0-9)做map映射一个id map<string, int>
+字符串出现次数存在结构体 id count 中 struct Str{int id; int count;}
+排序将最多次数字符串存入vector<string> 排序输出
+
+1072. Gas Station (30)
+分析：
+1.题目要求一个加油站，能够到达所有的屋子，并且这个加油站到屋子的最小距离尽可能地大
+2.最小距离一样的，根据平均距离来排序，平均距离仍然一样的，根据加油站的id来排序
+
+1070. Mooncake (25)
+
+1069. The Black Hole of Numbers (20)
+
+1067. Sort with Swap(0,) (25)
+分析：排序方式为swap(0,*)， 即0与pos交换实现排序。
+可以使用类似并查集的思想，待排序的序列可以分成几个集合，即集合内部元素可以转化为以集合位点对应的有序序列。当集合size == 1时此时集合已经有序，size > 1又分为含0与不含0，含0排序次数为size-1，不含0的排序次数为size+1；
